@@ -12,11 +12,11 @@ import { bootstrap } from './src/modules/bootstrap.js'
 
 const app = express()
 app.use(express.json())
- 
+app.use('/uploads', express.static('uploads'))
 bootstrap(app)
 
 app.use('*', (req, res, next) => {
-    next(new errorhandle(`route not found ${req.originalUrl},Try Visiting https://documenter.getpostman.com/view/35029632/2sA3e1Bq8s`, 404))
+    next(new errorhandle(`route not found ${req.originalUrl}`, 404))
 })
 
 app.use(globalerror)

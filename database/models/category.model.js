@@ -11,4 +11,9 @@ const schema = new Schema({
 },{
     timestamps:true,    versionKey:false
 })
+
+schema.post("init" ,function(doc){
+    doc.image="https://localhost:3000/uploads/categories/"+doc.image
+})
+
 export const Category =model("Category",schema)

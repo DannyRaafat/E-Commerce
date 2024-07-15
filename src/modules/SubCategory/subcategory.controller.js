@@ -2,19 +2,11 @@ import slugify from "slugify";
 import { catcherror } from "../../middleware/catcherror.js";
 import { errorhandle } from "../../utils/errorhandle.js";
 import { SubCategory } from "../../../database/models/SubCategory.model.js";
+import { deleteone, getall, getone } from "../../handlers/handler.js";
 
-const getSubCategory = catcherror (async (req, res, next) => {
-    const subcategory = await SubCategory.findById(req.params.id);
-    subcategory || next(new errorhandle("subcategory not found", 404));
+const getSubCategory = getone(SubCategory)
 
-    !subcategory || res.send(subcategory);  
-
-})
-
-const allSubCategory = catcherror(async (req, res, next) => {
-    const subcategory = await SubCategory.find();
-    res.send(subcategory);
-})
+const allSubCategory = getall(SubCategory)
 
 const addSubCategory =  catcherror  ( async (req, res, next) => {
     req.body.slug=slugify(req.body.name)
@@ -33,10 +25,5 @@ const updateSubCategory = catcherror( async (req, res, next) => {
      
 })
     
-const deleteSubCategory = catcherror(async (req, res, next) => {
-    const subcategory = await SubCategory.findByIdAndDelete(req.params.id);
-    subcategory || next(new errorhandle("subcategory not found", 404));
-    !subcategory || res.send(subcategory);  
-
-})
+const deleteSubCategory = deleteone(SubCategory)
 export { getSubCategory , addSubCategory , allSubCategory, updateSubCategory, deleteSubCategory }

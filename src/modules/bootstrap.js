@@ -8,7 +8,7 @@ import subcategoryRouter from "./SubCategory/subcategory.routes.js"
 export const bootstrap =(app) => {
     app.use("/api/categories",categoryRouter)
     app.use("/api/subcategories",subcategoryRouter)
-    app.use("/api/brand",brandRouter)
-    app.use("/api/product",productRouter)
+    app.use("/api/brands",brandRouter)
+    app.use("/api/products",productRouter)
 
 }

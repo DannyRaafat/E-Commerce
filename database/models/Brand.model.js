@@ -11,4 +11,10 @@ const schema = new Schema({
 },{
     timestamps:true,    versionKey:false
 })
+
+schema.post("init" ,function(doc){
+    doc.logo="https://localhost:3000/uploads/brands/"+doc.logo
+})
+
+
 export const Brand =model("Brand",schema)
