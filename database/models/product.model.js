@@ -1,5 +1,7 @@
 import mongoose, { Schema, Types, model } from "mongoose";
+import dotenv from "dotenv";
 
+dotenv.config();
 
 const schema = new Schema({
     title:{ type: String, unique:[true,"Brand name already exist"],trim:true, minLength:[3,"Brand name must be at least 3 characters long"]},
@@ -21,11 +23,21 @@ const schema = new Schema({
 
 
 },{
-    timestamps:true,    versionKey:false
+    timestamps:true,    versionKey:false,toJSON:{virtuals:true} 
+})
+
+schema.virtual("reviews", {
+    ref: "Review",
+    localField: "_id",
+    foreignField: "product"
+})
+schema.pre("findOne",function(next){
+    this.populate("reviews");
+    next();
 })
 schema.post("init" ,function(doc){
-    doc.imageCover="https://localhost:3000/uploads/products/"+doc.imageCover
-    doc.images=doc.images.map((image)=>"https://localhost:3000/uploads/products/"+image)
+    if (doc.imageCover) doc.imageCover=process.env.BASE_URL+"products/"+doc.imageCover
+    if (doc.images)  doc.images=doc.images.map((image)=>process.env.BASE_URL+"products/"+image)
 })
 
 export const Product =model("Product",schema)
