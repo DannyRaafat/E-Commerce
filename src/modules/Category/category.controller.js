@@ -1,5 +1,5 @@
 import slugify from "slugify";
-import { Category } from "../../../database/models/Category.model.js";
+import { Category } from "../../../database/models/category.model.js";
 import { catcherror } from "../../middleware/catcherror.js";
 import { errorhandle } from "../../utils/errorhandle.js";
 import fs from "fs";
