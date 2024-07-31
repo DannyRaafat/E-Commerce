@@ -7,14 +7,17 @@ import { dbConnection } from './database/dbConnection.js'
 import { errorhandle } from './src/utils/errorhandle.js'
 import { globalerror } from './src/middleware/globalerror.js'
 import { bootstrap } from './src/modules/bootstrap.js'
- 
+ import cors from "cors"
  
 
-const app = express()
-app.use(express.json())
+import 'dotenv/config'
+ const app = express()
+ const port=process.env.PORT || 3000
+app.use(cors())
+
+ app.use(express.json())
 app.use('/uploads', express.static('uploads'))
 bootstrap(app)
-
 app.use('*', (req, res, next) => {
     next(new errorhandle(`route not found ${req.originalUrl}`, 404))
 })
@@ -25,4 +28,4 @@ process.on(`unhandledRejection`, (err) => {
     console.log(err);
 })
  
-app.listen(3000, () => console.log("server is running")) 
+app.listen(port, () => console.log("server is running")) 
