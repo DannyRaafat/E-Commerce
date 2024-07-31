@@ -1,7 +1,7 @@
 import slugify from "slugify";
 import { catcherror } from "../../middleware/catcherror.js";
 import { errorhandle } from "../../utils/errorhandle.js";
-import { SubCategory } from "../../../database/models/SubCategory.model.js";
+import { SubCategory } from "../../../database/models/subCategory.model.js";
 import { deleteone, getall, getone } from "../../handlers/handler.js";
 
 const getSubCategory = getone(SubCategory)

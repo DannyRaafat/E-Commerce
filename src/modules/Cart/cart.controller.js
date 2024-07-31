@@ -1,8 +1,5 @@
 import { catcherror } from "../../middleware/catcherror.js";
 import { errorhandle } from "../../utils/errorhandle.js";
-import { Brand } from "../../../database/models/Brand.model.js";
-import fs from "fs";
-import { deleteone, getall, getone } from "../../handlers/handler.js";
 import { Cart } from "../../../database/models/Cart.model.js";
 import { Product } from "../../../database/models/product.model.js";
 import { Coupon } from "../../../database/models/coupon.model.js";
@@ -13,7 +10,7 @@ import { Coupon } from "../../../database/models/coupon.model.js";
     if(isCartExist.discount){
     isCartExist.totalCartPriceAfterDiscount=isCartExist.totalCartPrice-(isCartExist.totalCartPrice*isCartExist.discount)/100
     }
-    
+
 
  }
 
