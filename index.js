@@ -14,8 +14,6 @@ const stripe = new Stripe("sk_test_51PilPfB0ndlSY82ahx2YCdXnX79v96m7Mlas2hjtnwJE
 
 import 'dotenv/config'
 import { catcherror } from './src/middleware/catcherror.js'
-const app = express()
-const port = process.env.PORT || 3000
 app.post('/api/webhook', express.raw({ type: 'application/json' }),catcherror ((req, res) => {
     const sig = req.headers['stripe-signature'].toString();
     let checkout
@@ -26,6 +24,9 @@ app.post('/api/webhook', express.raw({ type: 'application/json' }),catcherror ((
     }
     res.josn(checkout)
 }))
+const app = express()
+const port = process.env.PORT || 3000
+
 app.use(cors())
 
 app.use(express.json())
