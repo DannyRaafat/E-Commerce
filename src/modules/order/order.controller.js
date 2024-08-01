@@ -26,7 +26,7 @@ const creatCashOrder = catcherror(async (req, res, next) => {
             }
         })
     })
-    Product.bulkWrite(options)
+    await  Product.bulkWrite(options)
     await Cart.findByIdAndDelete(req.params.id);
      res.json(order)
 })
