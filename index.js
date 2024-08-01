@@ -17,8 +17,6 @@ import { catcherror } from './src/middleware/catcherror.js'
 const app = express()
 const port = process.env.PORT || 3000
 app.use(cors())
-
-app.use(express.json())
 app.post('/api/webhook', express.raw({ type: 'application/json' }),catcherror ((req, res) => {
     const sig = req.headers['stripe-signature'].toString();
     let checkout
@@ -29,6 +27,8 @@ app.post('/api/webhook', express.raw({ type: 'application/json' }),catcherror ((
     }
     res.josn(checkout)
 }))
+app.use(express.json())
+
 app.use('/uploads', express.static('uploads'))
 
 bootstrap(app)
