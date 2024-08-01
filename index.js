@@ -21,7 +21,7 @@ app.post('/api/webhook', express.raw({ type: 'application/json' }),catcherror ((
     let checkout
     let event = stripe.webhooks.constructEvent(req.body, sig, "whsec_0WMqCSfcbZbXNSQOtPqofpKxJGS1sn0E");
 
-    if(event.type === 'checkout.session.completed'){
+    if(event.type == 'checkout.session.completed'){
         checkout= event.data.object;
     }
     res.josn(checkout)
