@@ -30,6 +30,7 @@ app.post('/api/webhook', express.raw({ type: 'application/json' }),catcherror ((
     res.josn(checkout)
 }))
 app.use('/uploads', express.static('uploads'))
+
 bootstrap(app)
 app.use('*', (req, res, next) => {
     next(new errorhandle(`route not found ${req.originalUrl}`, 404))
