@@ -29,7 +29,7 @@ app.post('/api/webhook', express.raw({ type: 'application/json' }),catcherror (a
         checkout= event.data.object;
         let user= await User.findOne({email:checkout.customer_details.email})
         let cart = await Cart.findById(checkout.client_reference_id)
-        if (!cart) next(new errorhandle("cart not found", 404))
+        if (!cart) return next( new errorhandle("cart not found", 404))
         let order = new Order({
             user: user._id,
             orderitems: cart.cartitems,
