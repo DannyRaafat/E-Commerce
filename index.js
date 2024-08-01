@@ -14,16 +14,7 @@ const stripe = new Stripe("sk_test_51PilPfB0ndlSY82ahx2YCdXnX79v96m7Mlas2hjtnwJE
 
 import 'dotenv/config'
 import { catcherror } from './src/middleware/catcherror.js'
-app.post('/api/webhook', express.raw({ type: 'application/json' }),catcherror ((req, res) => {
-    const sig = req.headers['stripe-signature'].toString();
-    let checkout
-    let event = stripe.webhooks.constructEvent(req.body, sig, "whsec_0WMqCSfcbZbXNSQOtPqofpKxJGS1sn0E");
-    console.log(event.type);
-    if(event.type == 'checkout.session.completed'){
-        checkout= event.data.object;
-    }
-    res.josn(checkout)
-}))
+
 const app = express()
 const port = process.env.PORT || 3000
 
