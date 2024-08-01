@@ -20,7 +20,7 @@ app.post('/api/webhook', express.raw({ type: 'application/json' }),catcherror ((
     const sig = req.headers['stripe-signature'].toString();
     let checkout
     let event = stripe.webhooks.constructEvent(req.body, sig, "whsec_0WMqCSfcbZbXNSQOtPqofpKxJGS1sn0E");
-
+    console.log(event.type);
     if(event.type == 'checkout.session.completed'){
         checkout= event.data.object;
     }
