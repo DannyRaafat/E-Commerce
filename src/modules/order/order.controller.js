@@ -43,7 +43,7 @@ const getAllOrders=catcherror(async(req,res,next)=>{
 
 const creatCheckoutSession = catcherror(async (req, res, next) => {
     let cart = await Cart.findById(req.params.id)
-    if (!cart) next(new errorhandle("cart not found", 404))
+    if (!cart) return  next( new errorhandle("cart not found", 404))
     let totalOrderPrice = cart.totalCartPriceAfterDiscount || cart.totalCartPrice
     let session=await stripe.checkout.sessions.create({
         line_items:[
